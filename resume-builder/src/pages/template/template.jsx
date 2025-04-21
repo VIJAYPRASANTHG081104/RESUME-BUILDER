@@ -1,24 +1,21 @@
-import React, { useRef,useState } from 'react';
-import { useReactToPrint } from 'react-to-print';
-import Template1 from './template1'
-import DefaultLayout from '../../components/Defaultlayout'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import Template2 from './template2'
-import Template4 from './template4';
-import Template3 from './template3';
-import Template6 from './template6';
-import Template5 from './template5';
-import Templatenew from './templatenew';
-import Template8 from './template8';
-import { message } from 'antd';
-import axios from 'axios';
-import editedEducationDescriptions from './editor/Education'
+import React, { useRef, useState } from "react";
+import { useReactToPrint } from "react-to-print";
+import Template1 from "./template1";
+import DefaultLayout from "../../components/Defaultlayout";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Template2 from "./template2";
+import Template4 from "./template4";
+import Template3 from "./template3";
+import Template6 from "./template6";
+import Template5 from "./template5";
+import Templatenew from "./templatenew";
+import Template8 from "./template8";
+import { message } from "antd";
+import axios from "axios";
+import editedEducationDescriptions from "./editor/Education";
 
 const Template = () => {
-
-
-
-  const user = JSON.parse(localStorage.getItem('resume-user'));
+  const user = JSON.parse(localStorage.getItem("resume-user"));
 
   ////FIRST NAME
   const [isEditingFirstName, setIsEditingFirstName] = useState(false);
@@ -37,7 +34,7 @@ const Template = () => {
   };
 
   const renderFirstName = () => {
-    if (isEditingFirstName ) {
+    if (isEditingFirstName) {
       return (
         <input
           type="text"
@@ -46,12 +43,14 @@ const Template = () => {
           onChange={handleFirstNameChange}
           onBlur={handleFirstNameBlur}
           autoFocus
-          style={{height:"30px",width:"auto"}}
+          style={{ height: "30px", width: "auto" }}
         />
       );
     } else {
       return (
-        <h1 style={{fontSize:"40px"}}onClick={handleFirstNameClick}>{editedFirstName.toUpperCase()}</h1>
+        <h1 style={{ fontSize: "40px" }} onClick={handleFirstNameClick}>
+          {editedFirstName.toUpperCase()}
+        </h1>
       );
     }
   };
@@ -81,21 +80,23 @@ const Template = () => {
           onChange={handleLastNameChange}
           onBlur={handleLastNameBlur}
           autoFocus
-          style={{height:"30px",width:"auto"}}
+          style={{ height: "30px", width: "auto" }}
         />
       );
     } else {
       return (
-        <h1 style={{fontSize:"40px"}}onClick={handleLastNameClick}>{editedLastName.toUpperCase()}</h1>
+        <h1 style={{ fontSize: "40px" }} onClick={handleLastNameClick}>
+          {editedLastName.toUpperCase()}
+        </h1>
       );
     }
   };
-    ///////
+  ///////
 
   //////OBJECTIVE
 
   //////
-  
+
   const [isEditingObjective, setIsEditingObjective] = useState(false);
   const [editedObjective, setEditedObjective] = useState(user.Objective);
 
@@ -121,10 +122,10 @@ const Template = () => {
           onChange={handleObjectiveChange}
           onBlur={handleObjectiveBlur}
           onKeyUp={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === "Enter") {
               handleObjectiveBlur();
-            } else if (e.key === 'Escape') {
-              setEditedObjective(user.Objective); 
+            } else if (e.key === "Escape") {
+              setEditedObjective(user.Objective);
               handleObjectiveBlur();
             }
           }}
@@ -132,13 +133,13 @@ const Template = () => {
           style={{
             height: "50px",
             width: "100%",
-            border: "1px solid #ccc", 
+            border: "1px solid #ccc",
           }}
         />
       );
     } else {
       return (
-        <p className='para' onClick={handleObjectiveClick}>
+        <p className="para" onClick={handleObjectiveClick}>
           {editedObjective}
         </p>
       );
@@ -171,10 +172,10 @@ const Template = () => {
           onChange={handleEmailChange}
           onBlur={handleEmailBlur}
           onKeyUp={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === "Enter") {
               handleEmailBlur();
-            } else if (e.key === 'Escape') {
-              setEditedEmail(user.Email); 
+            } else if (e.key === "Escape") {
+              setEditedEmail(user.Email);
               handleEmailBlur();
             }
           }}
@@ -182,13 +183,13 @@ const Template = () => {
           style={{
             height: "50px",
             width: "100%",
-            border: "1px solid #ccc", 
+            border: "1px solid #ccc",
           }}
         />
       );
     } else {
       return (
-        <p className='para' onClick={handleEmailClick}>
+        <p className="para" onClick={handleEmailClick}>
           {editedEmail}
         </p>
       );
@@ -196,8 +197,10 @@ const Template = () => {
   };
   //////mobileNo
 
-const [isEditingMobilenumber, setIsEditingMobilenumber] = useState(false);
-  const [editedMobilenumber, setEditedMobilenumber] = useState(user.Mobilenumber);
+  const [isEditingMobilenumber, setIsEditingMobilenumber] = useState(false);
+  const [editedMobilenumber, setEditedMobilenumber] = useState(
+    user.Mobilenumber
+  );
 
   const handleMobilenumberClick = () => {
     setIsEditingMobilenumber(true);
@@ -221,10 +224,10 @@ const [isEditingMobilenumber, setIsEditingMobilenumber] = useState(false);
           onChange={handleMobilenumberChange}
           onBlur={handleMobilenumberBlur}
           onKeyUp={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === "Enter") {
               handleMobilenumberBlur();
-            } else if (e.key === 'Escape') {
-              setEditedMobilenumber(user.Mobilenumber); 
+            } else if (e.key === "Escape") {
+              setEditedMobilenumber(user.Mobilenumber);
               handleMobilenumberBlur(); // Remove parentheses here
             }
           }}
@@ -232,13 +235,13 @@ const [isEditingMobilenumber, setIsEditingMobilenumber] = useState(false);
           style={{
             height: "50px",
             width: "100%",
-            border: "1px solid #ccc", 
+            border: "1px solid #ccc",
           }}
         />
       );
     } else {
       return (
-        <p className='para' onClick={handleMobilenumberClick}>
+        <p className="para" onClick={handleMobilenumberClick}>
           {editedMobilenumber}
         </p>
       );
@@ -270,10 +273,10 @@ const [isEditingMobilenumber, setIsEditingMobilenumber] = useState(false);
           onChange={handleLinkedInChange}
           onBlur={handleLinkedInBlur}
           onKeyUp={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === "Enter") {
               handleLinkedInBlur();
-            } else if (e.key === 'Escape') {
-              setEditedLinkedIn(user.LinkedIn); 
+            } else if (e.key === "Escape") {
+              setEditedLinkedIn(user.LinkedIn);
               handleLinkedInBlur(); // Remove parentheses here
             }
           }}
@@ -281,13 +284,13 @@ const [isEditingMobilenumber, setIsEditingMobilenumber] = useState(false);
           style={{
             height: "50px",
             width: "100%",
-            border: "1px solid #ccc", 
+            border: "1px solid #ccc",
           }}
         />
       );
     } else {
       return (
-        <p className='para' onClick={handleLinkedInClick}>
+        <p className="para" onClick={handleLinkedInClick}>
           {editedLinkedIn}
         </p>
       );
@@ -319,10 +322,10 @@ const [isEditingMobilenumber, setIsEditingMobilenumber] = useState(false);
           onChange={handleAddressChange}
           onBlur={handleAddressBlur}
           onKeyUp={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === "Enter") {
               handleAddressBlur();
-            } else if (e.key === 'Escape') {
-              setEditedAddress(user.Address); 
+            } else if (e.key === "Escape") {
+              setEditedAddress(user.Address);
               handleAddressBlur(); // Remove parentheses here
             }
           }}
@@ -330,13 +333,13 @@ const [isEditingMobilenumber, setIsEditingMobilenumber] = useState(false);
           style={{
             height: "50px",
             width: "100%",
-            border: "1px solid #ccc", 
+            border: "1px solid #ccc",
           }}
         />
       );
     } else {
       return (
-        <p className='para' onClick={handleAddressClick}>
+        <p className="para" onClick={handleAddressClick}>
           {editedAddress}
         </p>
       );
@@ -348,7 +351,9 @@ const [isEditingMobilenumber, setIsEditingMobilenumber] = useState(false);
   //////////
 
   const [isEditingEducation, setIsEditingEducation] = useState(false);
-  const [editedEducation, setEditedEducation] = useState(user.education[0].EduDes);
+  const [editedEducation, setEditedEducation] = useState(
+    user.education[0].EduDes
+  );
 
   const handleEducationClick = () => {
     setIsEditingEducation(true);
@@ -372,10 +377,10 @@ const [isEditingMobilenumber, setIsEditingMobilenumber] = useState(false);
           onChange={handleEducationChange}
           onBlur={handleEducationBlur}
           onKeyUp={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === "Enter") {
               handleEducationBlur();
-            } else if (e.key === 'Escape') {
-              setEditedEducation(user.education[0].EduDes); 
+            } else if (e.key === "Escape") {
+              setEditedEducation(user.education[0].EduDes);
               handleEducationBlur();
             }
           }}
@@ -383,13 +388,13 @@ const [isEditingMobilenumber, setIsEditingMobilenumber] = useState(false);
           style={{
             height: "30px",
             width: "100%",
-            border: "1px solid #ccc", 
+            border: "1px solid #ccc",
           }}
         />
       );
     } else {
       return (
-        <p className='para' onClick={handleEducationClick}>
+        <p className="para" onClick={handleEducationClick}>
           {editedEducation}
         </p>
       );
@@ -410,76 +415,105 @@ const [isEditingMobilenumber, setIsEditingMobilenumber] = useState(false);
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
-  })
+  });
   const params = useParams();
-  
+
   const onFinish = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/user/template', {
-        _id: user._id,
-        Firstname: editedFirstName,
-        Lastname: editedLastName,
-        Objective: editedObjective,
-        Email: editedEmail,
-        Mobilenumber: editedMobilenumber,
-        LinkedIn: editedLinkedIn,
-        Address: editedAddress,
-      });
-        localStorage.setItem('resume-user', JSON.stringify(response.data));
-        message.success('update successful')
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/template`,
+        {
+          _id: user._id,
+          Firstname: editedFirstName,
+          Lastname: editedLastName,
+          Objective: editedObjective,
+          Email: editedEmail,
+          Mobilenumber: editedMobilenumber,
+          LinkedIn: editedLinkedIn,
+          Address: editedAddress,
+        }
+      );
+      localStorage.setItem("resume-user", JSON.stringify(response.data));
+      message.success("update successful");
     } catch (error) {
-      
-      message.error('update failed'); 
-     
+      message.error("update failed");
     }
   };
-  
 
-  console.log(editedEducationDescriptions)
+  console.log(editedEducationDescriptions);
 
   const getTemplate = () => {
     switch (params.id) {
-      case '1': {
-        return <Template1 renderFirstName={renderFirstName} renderLastName={renderLastName} renderObjective={renderObjective} renderEmail={renderEmail}  renderMobilenumber={renderMobilenumber} renderLinkedIn={renderLinkedIn} renderAddress={renderAddress}/>
+      case "1": {
+        return (
+          <Template1
+            renderFirstName={renderFirstName}
+            renderLastName={renderLastName}
+            renderObjective={renderObjective}
+            renderEmail={renderEmail}
+            renderMobilenumber={renderMobilenumber}
+            renderLinkedIn={renderLinkedIn}
+            renderAddress={renderAddress}
+          />
+        );
       }
-      case '2': {
-        return <Template2 renderFirstName={renderFirstName} renderLastName={renderLastName} renderObjective={renderObjective} renderEmail={renderEmail}  renderMobilenumber={renderMobilenumber} renderLinkedIn={renderLinkedIn} renderAddress={renderAddress}/>
+      case "2": {
+        return (
+          <Template2
+            renderFirstName={renderFirstName}
+            renderLastName={renderLastName}
+            renderObjective={renderObjective}
+            renderEmail={renderEmail}
+            renderMobilenumber={renderMobilenumber}
+            renderLinkedIn={renderLinkedIn}
+            renderAddress={renderAddress}
+          />
+        );
       }
-      case '3': {
-        return <Template3 renderFirstName={renderFirstName} renderLastName={renderLastName} renderObjective={renderObjective}/>
+      case "3": {
+        return (
+          <Template3
+            renderFirstName={renderFirstName}
+            renderLastName={renderLastName}
+            renderObjective={renderObjective}
+          />
+        );
       }
-      case '4': {
-        return <Template4 />
+      case "4": {
+        return <Template4 />;
       }
-      case '5': {
-        return <Template5 />
+      case "5": {
+        return <Template5 />;
       }
-      case '6': {
-        return <Template6 />
+      case "6": {
+        return <Template6 />;
       }
-      case '7': {
-        return <Templatenew />
+      case "7": {
+        return <Templatenew />;
       }
-      case '8': {
-        return <Template8 />
+      case "8": {
+        return <Template8 />;
       }
     }
-  }
+  };
   return (
     <DefaultLayout>
-      <div className='template'>
-        <div className='d-flex justify-content-end my-5 mx-5'>
-          <Link to={'/template'}><button className='backBtn' >Back</button></Link>
-          <button className='print mx-5' onClick={handlePrint}>Print</button>
-          <button className='print mx-5' onClick={onFinish}>Update</button>
-          
+      <div className="template">
+        <div className="d-flex justify-content-end my-5 mx-5">
+          <Link to={"/template"}>
+            <button className="backBtn">Back</button>
+          </Link>
+          <button className="print mx-5" onClick={handlePrint}>
+            Print
+          </button>
+          <button className="print mx-5" onClick={onFinish}>
+            Update
+          </button>
         </div>
-        <div ref={componentRef}>
-          {getTemplate()}
-        </div>
+        <div ref={componentRef}>{getTemplate()}</div>
       </div>
     </DefaultLayout>
-  )
-}
+  );
+};
 
-export default Template
+export default Template;

@@ -5,8 +5,10 @@ const uploadmiddleware = require('./multermiddleware')
 
 app.post('/login', async (req, res) => {
     try {
+        console.log(req.body)
         const result = await User.findOne({ username: req.body.username, password: req.body.password });
         console.log(result)
+        console.log("hello")
         if (result) {
             res.send(result);
         } else {

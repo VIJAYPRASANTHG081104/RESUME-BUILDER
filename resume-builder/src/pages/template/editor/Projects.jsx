@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
-import axios from 'axios'
-import { message } from 'antd';
+import React, { useState } from "react";
+import axios from "axios";
+import { message } from "antd";
 
 const ProjectSection = ({ user }) => {
-  const user1 = JSON.parse(localStorage.getItem('resume-user'));
+  const user1 = JSON.parse(localStorage.getItem("resume-user"));
   const [editedProjectDescriptions, setEditedProjectDescriptions] = useState(
     user.Projects.map((pro) => pro.Description)
   );
-  const [isEditingProjectDescriptions, setIsEditingProjectDescriptions] = useState(
-    new Array(user.Projects.length).fill(false)
-  );
+  const [isEditingProjectDescriptions, setIsEditingProjectDescriptions] =
+    useState(new Array(user.Projects.length).fill(false));
 
   const handleEditClick = (index) => {
     const newEditingState = [...isEditingProjectDescriptions];
@@ -17,24 +16,26 @@ const ProjectSection = ({ user }) => {
     setIsEditingProjectDescriptions(newEditingState);
   };
 
-  const handleSaveClick = async(index) => {
+  const handleSaveClick = async (index) => {
     const newDescriptions = [...editedProjectDescriptions];
-    setIsEditingProjectDescriptions(new Array(user.Projects.length).fill(false));
-    try{
-      const response = await axios.post('http://localhost:5000/api/user/template4', { Projects:editedProjectDescriptions, _id: user1._id });
-      console.log(response)
-      localStorage.setItem('resume-user', JSON.stringify(response.data));
-      message.success('update successful')
+    setIsEditingProjectDescriptions(
+      new Array(user.Projects.length).fill(false)
+    );
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/template4`,
+        { Projects: editedProjectDescriptions, _id: user1._id }
+      );
+      console.log(response);
+      localStorage.setItem("resume-user", JSON.stringify(response.data));
+      message.success("update successful");
+    } catch (error) {
+      console.log(error);
     }
-    catch(error){
-      console.log(error)
-    }
-    
   };
 
   return (
     <section className="Project sect">
-      
       {user.Projects.slice(0, 3).map((pro, index) => (
         <div className="timeline" style={{ breakInside: "avoid" }} key={index}>
           <div className="left-tl-content">
@@ -52,14 +53,11 @@ const ProjectSection = ({ user }) => {
                       const newDescriptions = [...editedProjectDescriptions];
                       newDescriptions[index] = e.target.value;
                       setEditedProjectDescriptions(newDescriptions);
-                     
                     }}
-                    style={{width:"100%"}}
+                    style={{ width: "100%" }}
                   />
                 ) : (
-                  <>
-                    
-                  </>
+                  <></>
                 )}
               </h5>
               <p className="para">
@@ -73,7 +71,6 @@ const ProjectSection = ({ user }) => {
                       handleEditClick(index);
                     }}
                   >
-                    
                     {editedProjectDescriptions[index]}
                   </span>
                 )}

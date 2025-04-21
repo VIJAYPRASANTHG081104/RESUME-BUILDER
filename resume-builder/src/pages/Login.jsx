@@ -12,6 +12,7 @@ function Login() {
   const navigate = useNavigate()
   const [loading, setloading] = useState(false)
   const onFinish = async (values) => {
+    console.log(values)
     setloading(true)
     try {
       const user = await axios.post("api/user/login", values);
