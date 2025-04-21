@@ -7,6 +7,7 @@ import axios from 'axios'
 import resume from '../images/resume.jpg'
 
 function Login() {
+  console.log(process.env);
   const emailRegex = /^[a-zA-Z][a-zA-Z0-9_\-\.]+[@][a-z]+[\.][a-z]{2,3}/;
   const usernameRegex = /^[a-zA-Z][a-zA-Z0-9]+/;
   const navigate = useNavigate()
@@ -15,7 +16,10 @@ function Login() {
     console.log(values)
     setloading(true)
     try {
-      const user = await axios.post("api/user/login", values);
+      const user = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/login`,
+        values
+      );
       setloading(false)
       message.success("Login successful");
       navigate('/home')
